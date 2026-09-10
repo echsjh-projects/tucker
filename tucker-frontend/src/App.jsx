@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react'
+import { fetchEpisodes } from './api'
 import { useState } from 'react'
 import GlobalFreq from './components/GlobalFreq'
 import EpisodeFreq from './components/EpisodeFreq'
@@ -13,6 +15,12 @@ const TABS = [
 export default function App() {
   const [tab, setTab] = useState('global')
 
+  const [episodeCount, setEpisodeCount] = useState(0)
+
+  useEffect(() => {
+    fetchEpisodes().then(eps => setEpisodeCount(eps.length))
+  }, [])
+
   return (
     <div className="app">
       <header className="header">
@@ -22,7 +30,7 @@ export default function App() {
             <h1 className="header-h1">Tucker Carlson<br/>Word Intelligence</h1>
           </div>
           <div className="header-meta">
-            <span className="meta-pill">361 Episodes</span>
+            <span className="meta-pill">{episodeCount} Episodes</span>
             <span className="meta-pill">Whisper AI</span>
             <span className="meta-pill accent">Live</span>
           </div>
