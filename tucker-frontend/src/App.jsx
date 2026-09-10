@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { fetchEpisodes } from './api'
-import { useState } from 'react'
 import GlobalFreq from './components/GlobalFreq'
 import EpisodeFreq from './components/EpisodeFreq'
 import WordTracker from './components/WordTracker'
