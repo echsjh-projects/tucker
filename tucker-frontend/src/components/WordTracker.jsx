@@ -10,6 +10,8 @@ const PRESETS = ['war', 'israel', 'iran', 'china', 'trump', 'media', 'government
 const CustomTooltip = ({ active, payload }) => {
   if (!active || !payload?.length) return null
   const d = payload[0].payload
+  const m = d.pub_date?.match(/\w+,\s+(\d+)\s+(\w+)\s+(\d{4})/)
+  const formattedDate = m ? `${m[1]} ${m[2].slice(0,3)} ${m[3]}` : d.pub_date
   return (
     <div style={{
       background: '#1a1a1a', border: '1px solid #333',
@@ -17,7 +19,7 @@ const CustomTooltip = ({ active, payload }) => {
       maxWidth: 280
     }}>
       <div style={{ color: '#e85432', fontSize: 14, fontFamily: 'Bebas Neue', marginBottom: 4 }}>
-        {d.pub_date ? d.pub_date.slice(0, 10) : ''}
+        {formattedDate}
       </div>
       <div style={{ color: '#888', marginBottom: 4, fontSize: 11, lineHeight: 1.4 }}>
         {d.title?.slice(0, 60)}{d.title?.length > 60 ? '…' : ''}
